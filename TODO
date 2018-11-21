@@ -1,0 +1,22 @@
+-> add string conversion
+	-> buffer2.readstring(buf, start=1, end=-1)
+	-> buffer2.writestring(buf, str, start=1, end=-1, stidx=1)
+	-> buffer2.fromstring(str, start=1, end=-1)
+	
+-> add duplication
+	-> buffer2.clone(buf, start=1, end=-1)
+	
+-> add copy
+	-> buffer2.copy(src, dst, start=1, end=-1, didx=1)
+	-> buffer2.internalcopy(buf, start, len, idx)
+
+-> add search
+	-> buffer2.find(src, sub, start=1)
+
+-> add foreach/map
+	-> buffer2.foreach(src, fn, start=1, end=-1)
+	-> buffer2.map(src, fn, inplace=false, start=1, end=-1)
+
+-> add type lib support
+	-> set its class to "buffer2"
+	-> give its lib, its metatable, its getters and its setters
