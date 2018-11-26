@@ -6,25 +6,32 @@ LIBS = -llua5.3
 OPTS = -Wall -Wextra -fPIC
 
 CC = gcc
+AR = ar
 OBJS = buffer2.o wrapper.o
 NAME = buffer2
 
-all: $(NAME).so
+LLIB = $(NAME).so
+CLIB = $(NAME).a
 
-test: $(NAME).so
+all: $(LLIB) $(CLIB)
+
+test: $(LLIB)
 	lua5.3 -l $(NAME)
 
-debug: $(NAME).so
+debug: $(LLIB)
 	valgrind lua5.3 -l $(NAME)
 
 clean:
 	rm -f *.o
 
 mrproper: clean
-	rm -f $(NAME).so
+	rm -f $(LLIB) $(CLIB)
 
-$(NAME).so: $(OBJS)
+$(LLIB): $(OBJS)
 	$(CC) $(OPTS) $(LIBS) $(LDFLAGS) $^ -o $@
+
+$(CLIB): buffer2.o
+	$(AR) cr $@ $^
 
 %.o: %.c
 	$(CC) $(OPTS) $(LIBS) $(CFLAGS) -c $^ -o $@
